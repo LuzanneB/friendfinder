@@ -34,7 +34,7 @@
     <hr>
 
     <h3><strong>Question 1</strong></h3>
-    <!-- <h4>Your question here</h4> -->
+    <h4>I love spending time in the sun!</h4>
     <select class="chosen-select" id="q1">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -45,7 +45,7 @@
     </select>
 
     <h3><strong>Question 2</strong></h3>
-        <!-- <h4>Your question here</h4> -->
+        <h4>I love spending time with pet, mine or otherwise.</h4>
     <select class="chosen-select" id="q2">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -57,7 +57,7 @@
 
 
     <h3><strong>Question 3</strong></h3>
-        <!-- <h4>Your question here</h4> -->
+        <h4>I enjoy spending lots of time with family and close friends.</h4>
     <select class="chosen-select" id="q3">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -69,7 +69,7 @@
 
 
     <h3><strong>Question 4</strong></h3>
-       <!-- <h4>Your question here</h4> -->
+       <h4>I love to cook.</h4>
     <select class="chosen-select" id="q4">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -81,7 +81,7 @@
 
 
     <h3><strong>Question 5</strong></h3>
-       <!-- <h4>Your question here</h4> -->
+       <h4>I spend a lot of time outside of work...working.</h4>
     <select class="chosen-select" id="q5">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -93,7 +93,7 @@
 
 
     <h3><strong>Question 6</strong></h3>
-        <!-- <h4>Your question here</h4> -->
+        <h4>Personal space is important to me.</h4>
     <select class="chosen-select" id="q6">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -105,7 +105,7 @@
 
 
     <h3><strong>Question 7</strong></h3>
-      <!-- <h4>Your question here</h4> -->
+      <h4>I respect everyone's opinion.</h4>
     <select class="chosen-select" id="q7">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -116,7 +116,7 @@
     </select>
 
     <h3><strong>Question 8</strong></h3>
-        <!-- <h4>Your question here</h4> -->
+        <h4>I am a law abiding citizen.</h4>
     <select class="chosen-select" id="q8">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -127,7 +127,7 @@
     </select>
 
     <h3><strong>Question 9</strong></h3>
-       <!-- <h4>Your question here</h4> -->
+       <h4>I love to travel.</h4>
     <select class="chosen-select" id="q9">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -138,7 +138,7 @@
     </select>
 
     <h3><strong>Question 10</strong></h3>
-        <!-- <h4>Your question here</h4> -->
+        <h4>I enjoy being social.</h4>
     <select class="chosen-select" id="q10">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -212,8 +212,23 @@
     $("#submit").on("click", function(event) {
       event.preventDefault();
 
-      // Form validation (a function that varifies is all questions have benn answered)
-    
+      // Form validation (a function that varifies is all questions have been answered)
+    function formCheck(){
+      // declare the variable to hold boolean
+      var isValid = true
+      if( $(".form-control").val ==="" || $(".chosen-select") === ""){
+        isValid = false;
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Oh No!</strong> Looks like you missed some fields.  Try again!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+      }
+      else{
+        isVal
+      }
+    }
 
       // If all required fields are filled
       if (/*put function name here*/()) {
