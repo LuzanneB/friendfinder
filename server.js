@@ -28,8 +28,8 @@ app.use(express.json());
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 // ================================================================================
 
-require("../ClassRepo_Local/Homework/13-Express/Independence-egg/FriendFinder/app/routing/apiRoutes")(app);
-require("../ClassRepo_Local/Homework/13-Express/Independence-egg/FriendFinder/app/routing/htmlRoutes")(app);
+require("../friendfinder/app/routing/apiRoutes")(app);
+require("../friendfinder/app/routing/htmlRoutes")(app);
 
 // ==============================================================================
 // LISTENER

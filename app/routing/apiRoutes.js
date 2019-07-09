@@ -3,19 +3,23 @@
 // We are linking our routes to a series of "data" sources.
 // These data sources hold arrays of information on all possible friends
 // ===============================================================================
-
+var friendsData = require("../data/friends");
 
 
 // ===============================================================================
 // ROUTING
 // ===============================================================================
 
-
+module.exports = function(app) {
   // API GET Requests
   // Below code handles when users "visit" a page.
   // In each of the below cases when a user visits a link
   // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
   // ---------------------------------------------------------------------------
+  app.get("/api/friends", function(req, res) {
+    res.json(friendsData);
+  });
+
 
  
 
@@ -25,38 +29,63 @@
   // ...the JSON is pushed to the appropriate JavaScript array
   // ---------------------------------------------------------------------------
 
-
-    // Note the code here. Our "server" will respond to a user"s survey result
-    // Then compare those results against every user in the database.
-    // It will then calculate the difference between each of the numbers and the user"s numbers.
-    // It will then choose the user with the least differences as the "best friend match."
-    // In the case of multiple users with the same result it will choose the first match.
-    // After the test, it will push the user to the database.
-
-    // We will use this object to hold the "best match". We will constantly update it as we
-    // loop through all of the options
- 
-
-    // Here we take the result of the user"s survey POST and parse it.
+app.post("/api/friends"),function(req, res) {
     
-    // This variable will calculate the difference between the user"s scores and the scores of
-    // each user in the database
-    
+// Parse new friend input to get integers (AJAX post seemed to make the numbers strings)
+var newFriend = {
+  name: req.body.name,
+  photo: req.body.photo,
+  scores: []
+};
 
-    // Here we loop through all the friend possibilities in the database.
-    
-      // We then loop through all the scores of each friend
-      
-        // We calculate the difference between the scores and sum them into the totalDifference
-   
+var scoresArray = [];
 
-      // If the sum of differences is less then the differences of the current "best match"
-
-        // Reset the bestMatch to be the new friend.
-     
-    // Finally save the user's data to the database (this has to happen AFTER the check. otherwise,
-    // the database will always return that the user is the user's best friend).
+for(var i=0; i < req.body.scores.length; i++){
+  scoresArray.push( parseInt(req.body.scores[i]) )
+}
+newFriend.scores = scoresArray;
 
 
-    // Return a JSON with the user's bestMatch. This will be used by the HTML in the next page
- 
+// Cross check the new friend entry with the existing ones
+var scoreComparisionArray = [];
+for(var i=0; i < friendsData.length; i++){
+
+  // Check each friend's scores and sum difference in points
+  var currentComparison = 0;
+  for(var j=0; j < newFriend.scores.length; j++){
+    currentComparison += Math.abs( newFriend.scores[j] - friendsData[i].scores[j] );
+  }
+
+  // Push each comparison between friends to array
+  scoreComparisionArray.push(currentComparison);
+}
+
+// Determine the best match using the postion of best match in the friendsData array
+var bestMatchPosition = 0; // assume its the first person to start
+for(var i=1; i < scoreComparisionArray.length; i++){
+  
+  // Lower number in comparison difference means better match
+  if(scoreComparisionArray[i] <= scoreComparisionArray[bestMatchPosition]){
+    bestMatchPosition = i;
+  }
+
+}
+
+// ***NOTE*** If the 2 friends have the same comparison, then the NEWEST entry in the friendsData array is chosen
+var bestFriendMatch = friendsData[bestMatchPosition];
+
+
+
+// Reply with a JSON object of the best match
+res.json(bestFriendMatch);
+
+
+
+// Push the new friend to the friends data array for storage
+friendsData.push(newFriend);
+
+};
+
+}
+
+
