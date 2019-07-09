@@ -29,8 +29,10 @@ module.exports = function(app) {
   // ...the JSON is pushed to the appropriate JavaScript array
   // ---------------------------------------------------------------------------
 
-app.post("/api/friends"),function(req, res) {
+app.post("/api/friends", function(req, res) {
+    console.log("yes");
     
+    console.log(req.body)
 // Parse new friend input to get integers (AJAX post seemed to make the numbers strings)
 var newFriend = {
   name: req.body.name,
@@ -84,7 +86,7 @@ res.json(bestFriendMatch);
 // Push the new friend to the friends data array for storage
 friendsData.push(newFriend);
 
-};
+});
 
 }
 
